@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :users, only: [:new, :create, :show]
   resource :session, only: [:new, :create, :destroy]
-  resources :goals
+  resources :goals do
+    member {post :toggle_completion}
+  end
 end
 
 # The priority is based upon order of creation: first created -> highest priority.

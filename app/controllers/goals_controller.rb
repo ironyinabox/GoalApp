@@ -1,6 +1,11 @@
 class GoalsController < ApplicationController
 
   before_action :ensure_logged_in
+  before_action :redirect_if_not_owner, only: [:edit, :update]
+
+  def index
+    @goals = Goal.all
+  end
 
   def new
     @goal = Goal.new
@@ -35,7 +40,24 @@ class GoalsController < ApplicationController
     @goal.destroy
     redirect_to user_url(current_user)
   end
+
+  def show
+    @goal = Goal.find(params[:id])
+  end
+
+  def toggle_completion
+    @goal = Goal.find(params[:id])
+    @goal.toggle_completion
+    redirect_to user_url(@goal.user)
+  end
+
   private
+
+  def redirect_if_not_owner
+   goal = Goal.find(params[:id])
+   owner_id = goal.user_id
+   redirect_to user_url(current_user) if owner_id != current_user.id
+  end
 
   def goal_params
     params.require(:goal).permit([:user_id, :body, :private])

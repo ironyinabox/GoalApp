@@ -1,4 +1,4 @@
-<h1> <%= @user.username %>'s Home Page</h1>
+<h1> <%= current_user.username %>'s Home Page</h1>
 
 <ul>
   <% current_user.goals.each do |goal| %>
@@ -10,7 +10,13 @@
         <input type="hidden" name="_method" value="delete">
         <button>Delete Goal</button>
       </form>
+      <%= goal.completed ? "Completed" : "Incomplete" %>
+      <form action="<%=toggle_completion_goal_url(goal)%>" method="post">
+        <%= auth_token %>
+        <button>Toggle completion</button>
+      </form>
     </li>
+    <br><br>
   <% end %>
 </ul>
 

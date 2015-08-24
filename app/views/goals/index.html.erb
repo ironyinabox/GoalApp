@@ -1,0 +1,8 @@
+<h1>All Goals</h1>
+
+<ul>
+  <% @goals.each do |goal| %>
+    <% next if goal.private %>
+    <li> <%= goal.body %> by <%= goal.user.username %> </li>
+  <% end %>
+</ul>
