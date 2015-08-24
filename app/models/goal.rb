@@ -4,10 +4,6 @@ class Goal < ActiveRecord::Base
 
   belongs_to :user
 
-  has_many :comments,
-    class_name: "GoalComment",
-    foreign_key: :goal_id
-
   after_initialize :ensure_private, :ensure_completion_defaults_to_false
 
   def toggle_completion

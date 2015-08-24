@@ -4,14 +4,6 @@ class User < ActiveRecord::Base
   validates :username, uniqueness: true
 
   has_many :goals
-  
-  has_many :authored_comments,
-    class_name: "UserComment",
-    foreign_key: :author_id
-
-  has_many :comments,
-    class_name: "UserComment",
-    foreign_key: :user_id
 
   attr_reader :password
 
