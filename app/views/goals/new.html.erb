@@ -1,0 +1,15 @@
+<h1>Create New Goal</h1>
+
+<form action="<%=goals_url%>" method="post">
+  <%= auth_token %>
+
+  <label>Body
+    <input id="Body" type="text" name="goal[body]">
+  </label>
+
+  <label>Private
+    <input type="checkbox" name="goal[private]" value="true">
+  </label>
+
+  <button>Submit Goal</button>
+</form>
